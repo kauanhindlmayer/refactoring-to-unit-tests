@@ -10,14 +10,15 @@ namespace Store.Domain.Entities
     public decimal Amount { get; private set; }
     public DateTime ExpireDate { get; private set; }
 
-    public bool IsValid()
+    // IsValid
+    public bool Valid()
     {
       return DateTime.Compare(DateTime.Now, ExpireDate) < 0;
     }
 
     public decimal Value()
     {
-      if (IsValid())
+      if (Valid())
         return Amount;
       else
         return 0;
