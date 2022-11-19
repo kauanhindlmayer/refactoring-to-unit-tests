@@ -86,30 +86,29 @@ namespace Store.Tests.Domain
 
     [TestMethod]
     [TestCategory("Domain")]
-    public void Test9()
+    public void ShouldReturnTotalEqualsFiftyWhenDiscountIsValid()
     {
-      Assert.Fail();
+      var order = new Order(_customer, 10, _discount);
+      order.AddItem(_product, 5);
+      Assert.AreEqual(order.Total(), 50);
     }
 
     [TestMethod]
     [TestCategory("Domain")]
-    public void Test10()
+    public void ShouldReturnTotalEqualsSixtyWhenDeliveryFeeIsTen()
     {
-      Assert.Fail();
-    }
+      var order = new Order(_customer, 10, null);
+      order.AddItem(_product, 5);
+      Assert.AreEqual(order.Total(), 60);
+    } 
 
     [TestMethod]
     [TestCategory("Domain")]
-    public void Test11()
+    public void OrderWithoutCustomerShouldReturnInvalid()
     {
-      Assert.Fail();
-    }
-
-    [TestMethod]
-    [TestCategory("Domain")]
-    public void Test12()
-    {
-      Assert.Fail();
+     var order = new Order(null, 10, _discount);
+      order.AddItem(_product, 5);
+      Assert.AreEqual(order.IsValid, false);
     }
   }
 }
